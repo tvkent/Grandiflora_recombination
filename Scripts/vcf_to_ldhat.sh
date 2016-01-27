@@ -1,15 +1,19 @@
+#!/bin/bash
+
 #Convert VCF file to LDhat format
 #Tyler Kent
 #October 27, 2015
-#run this from base of Grandiflora_recombination
+#run this from base
 
-#!/bin/bash
 set -e
 set -u
 
-data=./Data/scaf1.vcf.gz
-err=./Results/Err/scaf1_vcf_to_ldhat.err
-out=./Results/scaf1.ldhat
-temp=./Results/temp
+id=scaf1_sub12.vcf.recode
+chr=scaffold_1
+data=./Grandiflora_recombination/Data/${id}.vcf.gz
+err=./Grandiflora_recombination/Results/Err/${id}_vcf_to_ldhat.err
+out=./Grandiflora_recombination/Results/${id}.ldhat
+temp=./Grandiflora_recombination/Results/temp
+vcfdir=/data/aplatts/data/apps/align/vcftools-0.1.14/bin/vcftools
 
-vcftools --gzvcf ${data} --ldhat-geno --temp ${temp} --out ${out} 2> ${err}
+${vcfdir} --gzvcf ${data} --ldhat-geno --chr ${chr} --temp ${temp} --out ${out} 2> ${err}
